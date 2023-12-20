@@ -1,6 +1,6 @@
 # Sowie-Schach
 
-Companion application for remixed chess. Staging version online at splendorous-kelpie-4b4fff.netlify.app
+Companion application for remixed chess. Staging version online at https://splendorous-kelpie-4b4fff.netlify.app
 
 ## Development quickstart
 
