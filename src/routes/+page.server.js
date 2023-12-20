@@ -34,14 +34,27 @@ const effects = {
     'WIEDERBELEBE:\n einen von meinen <Läufer> auf Feld $field'
   ]
 };
+
+const directions = {
+  lvl1: ['↑', '↓'],
+  lvl3: ['↑', '↓', '←', '→'],
+  lvl5: ['↖', '↗', '←', '→']
+};
+
+const levelRules = [
+  `Level 1: RICHTUNG: ${directions.lvl1.join(' / ')}`,
+  'Level 2: BEWEGEN: mit schieben',
+  `Level 3: RICHTUNG: ${directions.lvl3.join(' / ')}`,
+  `Level 4: BEWEGEN: mit schubsen;
+    … TAUSCH / WIEDERBELEBE: Ersatzweise Bauer`,
+  `Level 5: RICHTUNG: ${directions.lvl5.join(' / ')}`
+];
+
 export const load = async () => {
   return {
     categories: Object.keys(effects),
-	  directions: {
-		  lvl1: ["↑","↓"],
-		  lvl3: ["↑", "↓", "←", "→"],
-		  lvl5: ["↖", "↗", "←", "→"],
-	  },
+    directions,
+    levelRules,
     effects
   };
 };

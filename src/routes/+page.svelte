@@ -45,9 +45,16 @@
       const directionIndex = _random(directions[effectLevel].length);
       randomDirection = directions[effectLevel][directionIndex];
       effect = effect.replace(DIRECTION, randomDirection);
+
+      if (level > 1 && level < 4) {
+        effect = effect + '\n mit Schieben';
+      } else if (level >= 4) {
+        effect = effect + '\n mit Schubsen';
+      }
     } else if (effect.includes(FIELD)) {
       effect = effect.replace(FIELD, _random(16) + 1);
     }
+
     currentEffect = effect;
   }
 
@@ -94,7 +101,7 @@
       <li>Effekt würfeln</li>
     </ol>
 
-    <button class="button--effect" on:click={chooseEffect}>{currentEffect}</button>
+    <button class="button--effect g_pre-line" on:click={chooseEffect}>{currentEffect}</button>
 
     <div>Level: <code>{level}</code> / <code>{timer}</code></div>
   </section>
@@ -117,23 +124,12 @@
       <input type="number" bind:value={level} min="1" max="5" />
     </label>
 
-    <ul>
-      <li class:lvl--now={level === 1} class:lvl--past={level > 1}>
-        Level 1: RICHTUNG: {data.directions.lvl1.join(' / ')}
-      </li>
-      <li class:lvl--now={level === 2} class:lvl--past={level > 2}>
-        Level 2: BEWEGEN: mit schieben
-      </li>
-      <li class:lvl--now={level === 3} class:lvl--past={level > 3}>
-        Level 3: RICHTUNG: {data.directions.lvl3.join(' / ')}
-      </li>
-      <li class:lvl--now={level === 4} class:lvl--past={level > 4}>
-        Level 4: BEWEGEN: mit schubsen; <br />
-        … TAUSCH / WIEDERBELEBE: Ersatzweise Bauer
-      </li>
-      <li class:lvl--now={level === 5} class:lvl--past={level > 5}>
-        Level 5: RICHTUNG: {data.directions.lvl5.join(' / ')}
-      </li>
+    <ul class="g_pre-line">
+      {#each data.levelRules as rule, i}
+        <li class:lvl--now={level === i + 1} class:lvl--past={level > i + 1}>
+          {rule}
+        </li>
+      {/each}
     </ul>
   </section>
 </main>
@@ -156,7 +152,7 @@
   }
 
   .s_app {
-	  grid-template-rows: auto auto 1fr auto
+    grid-template-rows: auto auto 1fr auto;
   }
 
   footer {
@@ -164,11 +160,10 @@
     color: snow;
   }
 
-	.button--effect {
-		font-size: 2rem;
-		border-width: 1em;
-		white-space: pre-line;
-	}
+  .button--effect {
+    font-size: 2rem;
+    border-width: 1em;
+  }
 
   .lvl--past {
     font-style: italic;

@@ -49,3 +49,7 @@ body {
 code {
   font-family: var(--sk-font-mono);
 }
+
+.g_pre-line {
+  white-space: pre-line;
+}
