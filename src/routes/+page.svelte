@@ -148,7 +148,7 @@
   }
   section:nth-child(even) {
     min-height: 98vh;
-    background: #ccc;
+    background: var(--sk-back-4);
   }
 
   .s_app {
@@ -156,8 +156,11 @@
   }
 
   footer {
-    background: #222222;
-    color: snow;
+    background: var(--sk-text-1);
+    color: var(--sk-back-1);
+  }
+  footer a {
+    color: inherit;
   }
 
   .button--effect {
