@@ -1,5 +1,9 @@
 <script>
+  import { version } from '$app/environment';
+
   export let data;
+
+  const versionParts = version.split('_');
 
   let level = 1;
   let timer = '04:00';
@@ -134,7 +138,11 @@
   </section>
 </main>
 
-<footer>Version: 0.1.0</footer>
+<footer>
+  Version: <a href="https://github.com/gitbreaker222/sowieschach/commit/{versionParts[1]}">
+    {versionParts[0]}
+  </a>
+</footer>
 
 <style>
   section {
