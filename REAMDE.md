@@ -1,6 +1,6 @@
 # Sowie-Schach
 
-Companion application for remixed chess.
+Companion application for remixed chess. Staging version online at splendorous-kelpie-4b4fff.netlify.app
 
 ## Development quickstart
 
@@ -10,7 +10,7 @@ npm i
 npm run dev
 ```
 
-## Technichal info
+## Technical info
 
 - node 18
 - Svelte-Kit
