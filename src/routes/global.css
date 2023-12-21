@@ -1,11 +1,9 @@
 :root {
-  --sk-back-h: 206;
-  --sk-back-3-hsl: ;
   --sk-back-1: hsl(0, 0%, 100%);
   --sk-back-2: hsl(0, 0%, 100%);
-  --sk-back-3: hsl(206, 64%, 98%);
-  --sk-back-4: hsl(206, 44%, 93%);
-  --sk-back-5: hsl(206, 20%, 80%);
+  --sk-back-3: hsl(388, 64%, 98%);
+  --sk-back-4: hsl(388, 44%, 93%);
+  --sk-back-5: hsl(388, 20%, 80%);
   --sk-text-1: hsl(0, 0%, 13%);
   --sk-text-2: hsl(0, 0%, 27%);
   --sk-text-3: hsl(240, 8%, 44%);

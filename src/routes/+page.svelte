@@ -91,6 +91,13 @@
       timerRunning = true;
     }
   }
+
+  function addLevel(amount) {
+    const newLevel = level + amount;
+    if (newLevel < 1) return (level = 1);
+    else if (newLevel > 5) return (level = 5);
+    return (level = newLevel);
+  }
 </script>
 
 <main>
@@ -103,13 +110,15 @@
 
     <button class="button--effect g_pre-line" on:click={chooseEffect}>{currentEffect}</button>
 
-    <div>Level: <code>{level}</code> / <code>{timer}</code></div>
+    <div class="monitor">Level: <code>{level}</code> / <code>{timer}</code></div>
   </section>
 
   <section class="s_timer">
     <h1>Timer / Level</h1>
 
-    <button on:click={handleStartStop}>
+    <input class="timer" type="time" bind:value={timer} />
+
+    <button class="timer-button" on:click={handleStartStop}>
       {#if timerRunning}
         Stop ⏸
       {:else}
@@ -117,12 +126,11 @@
       {/if}
     </button>
 
-    <input type="time" bind:value={timer} />
-
-    <label>
-      Level:
-      <input type="number" bind:value={level} min="1" max="5" />
-    </label>
+    <div class="level-control">
+      <button on:click={() => addLevel(-1)}>-</button>
+      Level: {level}
+      <button on:click={() => addLevel(1)}>+</button>
+    </div>
 
     <ul class="g_pre-line">
       {#each data.levelRules as rule, i}
@@ -142,18 +150,72 @@
 
 <style>
   section {
-    min-height: 98vh;
+    min-height: 99vh;
     padding: 1rem;
     display: grid;
   }
   section:nth-child(even) {
-    min-height: 98vh;
     background: var(--sk-back-4);
   }
 
+  /* section app */
+
   .s_app {
-    grid-template-rows: auto auto 1fr auto;
+    grid-template-rows: auto 1fr 2fr 1fr;
   }
+
+  .s_app .monitor {
+    align-self: center;
+  }
+  @media (orientation: landscape) {
+    .s_app {
+      grid-template-rows: auto 1fr 1fr;
+      grid-template-columns: auto 1fr;
+      grid-gap: 1rem;
+    }
+    .s_app .button--effect {
+      grid-area: 1 / 2 / -1 / -1;
+    }
+  }
+
+  /* section timer */
+
+  .s_timer {
+    grid-template-rows: 1fr 3fr 1fr auto auto;
+    grid-gap: 0.5rem;
+  }
+
+  .s_timer .timer {
+    font-size: 25vw;
+    text-align: center;
+  }
+
+  .s_timer .level-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 3rem;
+  }
+
+  @media (orientation: landscape) {
+    .s_timer {
+      grid-template-rows: auto 1fr auto;
+      grid-template-columns: repeat(2, auto);
+      grid-gap: 0.5rem 1rem;
+    }
+    .s_timer .timer {
+      grid-area: 1 / 2 / span 2 / span 1;
+      font-size: 12vw;
+    }
+    .s_timer .timer-button {
+      grid-area: 3 / 2 / span 1 / span 1;
+    }
+    .s_timer .level-control {
+      grid-area: 3 / 1 / span 1 / span 1;
+    }
+  }
+
+  /* section footer */
 
   footer {
     background: var(--sk-text-1);
@@ -163,9 +225,16 @@
     color: inherit;
   }
 
+  /* elements */
+
   .button--effect {
     font-size: 2rem;
-    border-width: 1em;
+    border: 1em solid var(--sk-text-1);
+  }
+
+  .level-control button {
+    height: 100%;
+    width: 30%;
   }
 
   .lvl--past {

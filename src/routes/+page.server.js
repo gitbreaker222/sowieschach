@@ -28,10 +28,10 @@ const effects = {
     'BEWEGE:\n meine in SPALTE <Weiß> RICHTUNG $direction'
   ],
   RESURRECT: [
-    'WIEDERBELEBE:\n einen von meinen <Bauer> auf Feld $field',
-    'WIEDERBELEBE:\n einen von meinen <Turm> auf Feld $field',
-    'WIEDERBELEBE:\n einen von meinen <Springer> auf Feld $field',
-    'WIEDERBELEBE:\n einen von meinen <Läufer> auf Feld $field'
+    'WIEDERBELEBE:\n einen von meinen <Bauer>\n auf Feld $field',
+    'WIEDERBELEBE:\n einen von meinen <Turm>\n auf Feld $field',
+    'WIEDERBELEBE:\n einen von meinen <Springer>\n auf Feld $field',
+    'WIEDERBELEBE:\n einen von meinen <Läufer>\n auf Feld $field'
   ]
 };
 
