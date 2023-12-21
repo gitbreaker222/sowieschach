@@ -1,5 +1,6 @@
 <script>
   import { version } from '$app/environment';
+  import { fade } from 'svelte/transition';
 
   export let data;
 
@@ -103,10 +104,29 @@
 <main>
   <section class="s_app">
     <h1>Sowie Schach</h1>
-    <ol>
-      <li>Normaler Zug</li>
-      <li>Effekt würfeln</li>
-    </ol>
+    <div>
+      <ol>
+        <li>Normaler Zug</li>
+        <li>Effekt würfeln</li>
+      </ol>
+      {#if currentEffect?.startsWith('WIEDERBELEBE')}
+        <div class="effect-hint" transition:fade>
+          Feld-Nummern:
+          <table class="fields-table">
+            <tr>
+              {#each new Array(8) as x, i}
+                <td>{i + 9}</td>
+              {/each}
+            </tr>
+            <tr>
+              {#each new Array(8) as x, i}
+                <td>{i + 1}</td>
+              {/each}
+            </tr>
+          </table>
+        </div>
+      {/if}
+    </div>
 
     <button class="button--effect g_pre-line" on:click={chooseEffect}>{currentEffect}</button>
 
@@ -169,7 +189,7 @@
   }
   @media (orientation: landscape) {
     .s_app {
-      grid-template-rows: auto 1fr 1fr;
+      grid-template-rows: auto 1fr 3rem;
       grid-template-columns: auto 1fr;
       grid-gap: 1rem;
     }
@@ -230,6 +250,20 @@
   .button--effect {
     font-size: 2rem;
     border: 1em solid var(--sk-text-1);
+  }
+
+  .fields-table {
+    width: 100%;
+    background: snow;
+  }
+  .fields-table td {
+    text-align: center;
+    width: 12.5%;
+  }
+  .fields-table tr:nth-child(odd) td:nth-child(even),
+  .fields-table tr:nth-child(even) td:nth-child(odd) {
+    background: black;
+    color: snow;
   }
 
   .level-control button {
