@@ -54,6 +54,8 @@
       }
     } else if (effect.includes(FIELD)) {
       effect = effect.replace(FIELD, _random(16) + 1);
+    } else if (['SWAP', 'RESURRECT'].includes(categories[categoryIndex])) {
+      effect = effect + '\n (ersatzweise Bauer)';
     }
 
     currentEffect = effect;
