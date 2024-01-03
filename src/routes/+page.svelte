@@ -258,6 +258,7 @@
   .fields-table {
     width: 100%;
     background: snow;
+    color: black;
   }
   .fields-table td {
     text-align: center;
