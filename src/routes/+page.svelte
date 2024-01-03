@@ -133,7 +133,9 @@
 
     <button class="button--effect g_pre-line" on:click={chooseEffect}>{currentEffect}</button>
 
-    <div class="monitor">Level: <code>{level}</code> / <code>{timer}</code></div>
+    <button class="monitor" on:click={handleStartStop}>
+      Level: <code>{level}</code> / <code>{timer}</code>
+    </button>
   </section>
 
   <section class="s_timer">
