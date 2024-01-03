@@ -22,8 +22,7 @@
     const DIRECTION = '$direction';
     const FIELD = '$field';
 
-    const categoryIndex = _random(categories.length);
-    const category = categories[categoryIndex];
+    const category = categories[_random(categories.length)];
     const effectIndex = _random(effects[category].length);
     let effect = effects[category][effectIndex];
 
@@ -54,7 +53,9 @@
       }
     } else if (effect.includes(FIELD)) {
       effect = effect.replace(FIELD, _random(16) + 1);
-    } else if (['SWAP', 'RESURRECT'].includes(categories[categoryIndex])) {
+    }
+    
+    if (['SWAP', 'RESURRECT'].includes(category) && (level > 3)) {
       effect = effect + '\n (ersatzweise Bauer)';
     }
 
