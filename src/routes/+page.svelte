@@ -10,6 +10,7 @@
   let timer = '04:00';
   let timerRunning = false;
   let interval = null;
+  let effectBtnActive = false;
 
   let currentEffect = '(…Effekt…)';
 
@@ -17,7 +18,17 @@
     return Number.parseInt(Math.random() * max);
   }
 
-  function chooseEffect() {
+  function chooseEffect(event) {
+    const { currentTarget } = event;
+    currentTarget.addEventListener(
+      'animationend',
+      function () {
+        effectBtnActive = false;
+      },
+      { once: true }
+    );
+    effectBtnActive = true;
+
     const { categories, directions, effects } = data;
     const DIRECTION = '$direction';
     const FIELD = '$field';
@@ -54,8 +65,8 @@
     } else if (effect.includes(FIELD)) {
       effect = effect.replace(FIELD, _random(16) + 1);
     }
-    
-    if (['SWAP', 'RESURRECT'].includes(category) && (level > 3)) {
+
+    if (['SWAP', 'RESURRECT'].includes(category) && level > 3) {
       effect = effect + '\n (ersatzweise Bauer)';
     }
 
@@ -131,7 +142,13 @@
       {/if}
     </div>
 
-    <button class="button--effect g_pre-line" on:click={chooseEffect}>{currentEffect}</button>
+    <button
+      class="button--effect g_pre-line"
+      class:animating={effectBtnActive}
+      on:click={chooseEffect}
+    >
+      {currentEffect}
+    </button>
 
     <button class="monitor" on:click={handleStartStop}>
       Level: <code>{level}</code> / <code>{timer}</code>
@@ -255,6 +272,18 @@
   .button--effect {
     font-size: 2rem;
     border: 1em solid var(--sk-text-1);
+  }
+  .button--effect.animating {
+    animation: 200ms push alternate 2;
+  }
+
+  @keyframes push {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0.9);
+    }
   }
 
   .fields-table {
