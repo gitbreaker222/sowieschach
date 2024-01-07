@@ -1,6 +1,7 @@
 <script>
   import { version } from '$app/environment';
   import { fade } from 'svelte/transition';
+  import { templateStore } from '$lib/store/templateStore';
 
   export let data;
 
